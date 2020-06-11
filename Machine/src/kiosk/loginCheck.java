@@ -10,7 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class loginCheck {
+public class loginCheck { // 로그인 창이 뜨는 클래스
+	
+	dbDao db; // dbDao클래스를 db로 선언
 
 	JFrame frame = new JFrame(""); // 프레임 선언
 	JDialog dialog = new JDialog(frame, "관리자 로그인"); // 다이얼로그 선언
@@ -59,12 +61,11 @@ public class loginCheck {
 
 		});
 
-		// 로그인 버튼을 누르면 DB와 연동하여
+		// 로그인 버튼을 누르면 DB와 연동하여 로그인 체크를 함
 		btnLogin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				txtId.setText("");
-				txtPw.setText("");
+				new dbDao(); // dbDao 클래스 실행
 			}
 
 		});
