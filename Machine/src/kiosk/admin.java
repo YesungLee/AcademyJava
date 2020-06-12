@@ -38,9 +38,9 @@ public class admin {
 		
 		// Ordered 테이블을 읽어옴
 		dbDao temp = new dbDao();
-	//	dbVo result = new dbVo();
+		dbVo result = new dbVo();
 		temp.importOrdered();
-	//	txtOrdered.setText(result.getNo() + "\t" + result.getMenu());
+		txtOrdered.setText(result.getNo() + "\t" + result.getMenu());
 	}
 
 }

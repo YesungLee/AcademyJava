@@ -101,23 +101,6 @@ public class dbDao { // 입력한 아이디와 비밀번호를 확인 하는 클
 		dbclose(); // DB 종료
 		return rst;
 	}
-
-	public void importOrdered() {
-		admin temp = new admin();
-		getconnect(); // DB 접속
-		try {
-			String sql = "SELECT NO, MENU FROM ORDERED";
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				temp.txtOrdered.setText(rs.getString("NO") + "\t" + rs.getString("MENU"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		dbclose(); // DB 종료
-	}
-	/*
 	// Ordered 테이블을 읽어오는 메소드
 	public dbVo importOrdered() {
 		dbVo temp = new dbVo();
@@ -137,5 +120,5 @@ public class dbDao { // 입력한 아이디와 비밀번호를 확인 하는 클
 		dbclose(); // DB 종료
 		return temp;
 	}
-	*/
+	
 }
