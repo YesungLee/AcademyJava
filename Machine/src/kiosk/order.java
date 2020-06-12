@@ -14,7 +14,6 @@ public class order extends JFrame {
 	loginCheck login;
 	JPanel pan = new JPanel();
 	JButton btnAdmin = new JButton("관리자");
-	JTextField txt = new JTextField("d");
 
 	order() {
 		setTitle("버거킹 키오스크"); // 프레임 이름
@@ -31,8 +30,6 @@ public class order extends JFrame {
 		pan.setLayout(null);
 		btnAdmin.setBounds(620, 10, 120, 30);
 		pan.add(btnAdmin);
-		txt.setBounds(100, 100, 100, 100);
-		pan.add(txt);
 
 		btnAdmin.addActionListener(new ActionListener() {
 			@Override

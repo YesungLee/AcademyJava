@@ -7,13 +7,12 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class loginCheck { // 로그인 창이 뜨는 클래스
 	
-	dbDao db; // dbDao클래스를 db로 선언
-
 	JFrame frame = new JFrame(""); // 프레임 선언
 	JDialog dialog = new JDialog(frame, "관리자 로그인"); // 다이얼로그 선언
 	JPanel pan = new JPanel(); // 패널 선언
@@ -60,12 +59,21 @@ public class loginCheck { // 로그인 창이 뜨는 클래스
 			}
 
 		});
-
+		
 		// 로그인 버튼을 누르면 DB와 연동하여 로그인 체크를 함
 		btnLogin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new dbDao(); // dbDao 클래스 실행
+				dbDao dbCheck = new dbDao(); // dbDao 클래스를 dbCheck로 선언
+				int login = dbCheck.idCheck(txtId.getText(), txtPw.getText());
+				if (login == 1) { // 로그인 성공 시
+					admin GoAdmin = new admin(); // admin 클래스를 GoAdmin으로 선언 
+					dialog.dispose(); // loginCheck 클래스의 다이얼로그는 종료
+				} else { // 로그인 실패 시 메시지 출력과 아이디, 비밀번호 초기화
+					JOptionPane.showMessageDialog(null, "로그인 실패");
+					txtId.setText("");
+					txtPw.setText("");
+				}
 			}
 
 		});
