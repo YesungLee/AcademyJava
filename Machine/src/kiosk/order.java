@@ -4,20 +4,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 public class order extends JFrame {
 
-	loginCheck login;
 	JPanel pan = new JPanel();
 	JButton btnAdmin = new JButton("관리자");
 
 	order() {
 		setTitle("버거킹 키오스크"); // 프레임 이름
 		setSize(720, 1080); // 프레임 크기
+		open();
 	}
 
 	public void open() {
@@ -28,7 +26,7 @@ public class order extends JFrame {
 		setContentPane(pan);
 
 		pan.setLayout(null);
-		btnAdmin.setBounds(620, 10, 120, 30);
+		btnAdmin.setBounds(620, 10, 80, 20);
 		pan.add(btnAdmin);
 
 		btnAdmin.addActionListener(new ActionListener() {

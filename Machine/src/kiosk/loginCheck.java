@@ -17,8 +17,8 @@ public class loginCheck { // 로그인 창이 뜨는 클래스
 	JDialog dialog = new JDialog(frame, "관리자 로그인"); // 다이얼로그 선언
 	JPanel pan = new JPanel(); // 패널 선언
 	// 레이블 선언
-	JLabel LblId = new JLabel("아이디");
-	JLabel LblPw = new JLabel("비밀번호");
+	JLabel lblId = new JLabel("아이디");
+	JLabel lblPw = new JLabel("비밀번호");
 	// 아이디와 비번을 입력 받을 텍스트 필드 선언
 	JTextField txtId = new JTextField("");
 	JTextField txtPw = new JTextField("");
@@ -28,7 +28,7 @@ public class loginCheck { // 로그인 창이 뜨는 클래스
 
 	// GUI 구현 생성자
 	public loginCheck() {
-		dialog.setSize(300, 300); // 다이얼로그의 크기 설정
+		dialog.setSize(300, 180); // 다이얼로그의 크기 설정
 		dialog.setVisible(true); // 다이얼로그를 표시 해줌
 		dialog.setResizable(false); // 창 크기 조절 불가
 		dialog.setLocationRelativeTo(null); // 중앙에서 프레임 실행
@@ -37,18 +37,18 @@ public class loginCheck { // 로그인 창이 뜨는 클래스
 
 		pan.setLayout(null); // 레이아웃에 속하지 않음
 		// panel에 label과 textfield 추가, 좌표 지정
-		pan.add(LblId);
-		LblId.setBounds(40, 20, 60, 30);
-		pan.add(LblPw);
-		LblPw.setBounds(40, 60, 60, 30);
+		pan.add(lblId);
+		lblId.setBounds(50, 20, 60, 30);
+		pan.add(lblPw);
+		lblPw.setBounds(50, 60, 60, 30);
 		pan.add(txtId);
-		txtId.setBounds(120, 20, 120, 30);
+		txtId.setBounds(130, 20, 120, 30);
 		pan.add(txtPw);
-		txtPw.setBounds(120, 60, 120, 30);
+		txtPw.setBounds(130, 60, 120, 30);
 		pan.add(btnReset);
-		btnReset.setBounds(20, 100, 100, 30);
+		btnReset.setBounds(30, 100, 100, 30);
 		pan.add(btnLogin);
-		btnLogin.setBounds(140, 100, 100, 30);
+		btnLogin.setBounds(150, 100, 100, 30);
 
 		// 다시 입력 버튼을 누르면 아이디와 패스워드 텍스트 초기화
 		btnReset.addActionListener(new ActionListener() {
@@ -67,7 +67,7 @@ public class loginCheck { // 로그인 창이 뜨는 클래스
 				dbDao dbCheck = new dbDao(); // dbDao 클래스를 dbCheck로 선언
 				int login = dbCheck.idCheck(txtId.getText(), txtPw.getText());
 				if (login == 1) { // 로그인 성공 시
-					admin GoAdmin = new admin(); // admin 클래스를 GoAdmin으로 선언 
+					new admin(); // admin 클래스 선언 
 					dialog.dispose(); // loginCheck 클래스의 다이얼로그는 종료
 				} else { // 로그인 실패 시 메시지 출력과 아이디, 비밀번호 초기화
 					JOptionPane.showMessageDialog(null, "로그인 실패");
