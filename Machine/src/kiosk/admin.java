@@ -1,11 +1,14 @@
 package kiosk;
 
+import java.util.ArrayList;
+
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.xml.crypto.Data;
 
 public class admin {
 	
@@ -37,10 +40,12 @@ public class admin {
 		txtOrdered.setBounds(40, 60, 300, 200);
 		
 		// Ordered 테이블을 읽어옴
-		dbDao temp = new dbDao();
-		dbVo result = new dbVo();
-		temp.importOrdered();
-		txtOrdered.setText(result.getNo() + "\t" + result.getMenu());
+		dbDao dao = new dbDao();
+		ArrayList<dbVo> arr = new ArrayList<dbVo>();
+		arr = dao.importOrdered();
+		for (int i=0; i<arr.size(); i++) {
+			txtOrdered.append(arr.get(i).getNo() + " \t " + arr.get(i).getMenu());
+		}
 	}
 
 }

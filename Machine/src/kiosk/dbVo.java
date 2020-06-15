@@ -2,14 +2,23 @@ package kiosk;
 
 public class dbVo {
 
-	String no;
+	int no;
 	String menu;
 
-	public String getNo() {
+	public dbVo() {
+
+	}
+
+	public dbVo(int no, String menu) {
+		this.no = no;
+		this.menu = menu;
+	}
+
+	public int getNo() {
 		return no;
 	}
 
-	public void setNo(String no) {
+	public void setNo(int no) {
 		this.no = no;
 	}
 
