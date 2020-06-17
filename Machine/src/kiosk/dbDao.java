@@ -37,12 +37,12 @@ public class dbDao { // 입력한 아이디와 비밀번호를 확인 하는 클
 				// 연결에 성공하면 Connection 객체가 반환되고, 실패하면 예외가 발생한다.
 				conn = DriverManager.getConnection(url, user, password);
 			} catch (ClassNotFoundException e1) {
-//				System.out.println("DB 드라이버 로딩 실패 : " + e1.getMessage());
-//				System.out.println("DB 드라이버 로딩 실패 : " + e1.toString());
+//            System.out.println("DB 드라이버 로딩 실패 : " + e1.getMessage());
+//            System.out.println("DB 드라이버 로딩 실패 : " + e1.toString());
 			} catch (SQLException e2) {
-//				System.out.println("DB 접속 실패 : " + e2.toString());
+//            System.out.println("DB 접속 실패 : " + e2.toString());
 			} catch (Exception e3) {
-//				System.out.println("Unknown error");
+//            System.out.println("Unknown error");
 				e3.printStackTrace();
 			}
 		}
@@ -60,7 +60,7 @@ public class dbDao { // 입력한 아이디와 비밀번호를 확인 하는 클
 			if (pstmt != null)
 				pstmt.close();
 		} catch (SQLException e) {
-//			System.out.println(e + "-> dbclose 실패");
+//         System.out.println(e + "-> dbclose 실패");
 		}
 	}
 
@@ -90,16 +90,58 @@ public class dbDao { // 입력한 아이디와 비밀번호를 확인 하는 클
 		ArrayList<dbVo> arr = new ArrayList<dbVo>();
 		getconnect();
 		try {
-			 String sql = "SELECT NO, MENU FROM ORDERED";
-			 pstmt = conn.prepareStatement(sql);
-			 rs = pstmt.executeQuery();
-			 while (rs.next()) {
-				 arr.add(new dbVo(rs.getInt(1), rs.getString(2)));
-			 }
+			String sql = "SELECT NO, MENU FROM ORDERED";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				arr.add(new dbVo(rs.getInt(1), rs.getString(2)));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		dbclose();
 		return arr;
+	}
+
+	// 해당 메뉴의 가격을 조회하는 메소드
+	public int menuPrice(String menu) {
+		int rst = 0;
+		getconnect(); // DB 접속
+		try {
+			// SQL 구문
+			String sql = "select price from product where menu='?'";
+			pstmt = conn.prepareStatement(sql); // SQL 구문을 실행 시켜 줌
+			pstmt.setString(1, menu); // 첫 번째 물음표에 id를 넣음
+			rs = pstmt.executeQuery(); // 수행 결과를 객체의 값으로 반환
+			if (rs.next()) {
+				rst = rs.getInt("price"); // CNT에 있는 결과를 읽음
+			}
+		} catch (SQLException e) { // 에러 발생 시 구문
+			System.out.println("쿼리 에러 : " + e.getMessage());
+		}
+		dbclose(); // DB 종료
+		return rst;
+	}
+
+	// INSERT 메소드
+	public void pay(int num, String menu) {
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+
+			conn = DriverManager.getConnection(url, user, password);
+			// 접속 성공시 conn = 접속결과 객체값
+			stmt = conn.createStatement();
+			String sql = "INSERT INTO ORDERED VALUES(?, ?)";
+			stmt.executeUpdate(sql);
+			pstmt.setInt(1, num);
+			pstmt.setString(2, menu);
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩실패");
+			e.printStackTrace();
+		} catch (SQLException e2) {
+			System.out.println("드라이버 접속실패");
+			e2.printStackTrace();
+		}
 	}
 }
